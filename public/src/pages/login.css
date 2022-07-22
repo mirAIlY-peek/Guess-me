@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Keania+One&display=swap');
+
+body{
+    background-image: url("../assets/obr.svg");
+    background-size: cover;
+    overflow: hidden;
+    font-family: 'Keania One', cursive;
+    background-repeat:no-repeat ;
+}
+h1{
+    font-family: 'Keania One', cursive;
+}
