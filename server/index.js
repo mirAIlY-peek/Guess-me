@@ -8,12 +8,8 @@ const socket = require("socket.io");
 require("dotenv").config();
 const User = require("./models/userModel.js");
 const Room = require('./models/Room.js')
-// const path = require('path')
-// const http = require('http')
-//
-// const { addUser, removeUser, getUser, getUserInRoom } = require('../../Anonim/public/src/utils/users')
 
-
+const { getAllUsers } = require('controllers/userController')
 
 app.use(cors());
 app.use(express.json());
@@ -43,6 +39,12 @@ const io = socket(server, {
 });
 
 global.onlineUsers = new Map();
+if(onlineUsers.size >2){
+
+} else {
+  new Room()
+
+}
 io.on("connection", (socket) => {
   global.chatSocket = socket;
   socket.on("add-user", (userId) => {
@@ -58,15 +60,50 @@ io.on("connection", (socket) => {
 });
 
 
+
+
 let clientNo = 0;
 let No;
 
+// async function getAllUsers (req, res )  {
+//   // const { username, email, password} = req.body;
+//   const users = await User.find({_id: req.params._id}).select([
+//     "username",
+//     "_id",
+//   ]);
+//   console.log(users);
+// };
+// getAllUsers()
+
 run()
+
 async function run() {
+  if(getAllUsers()){
+
+  }
+  clientNo++
   const rooms = new Room({roomName: "1"})
   await rooms.save()
   console.log(rooms)
 }
+
+
+// async function getAllUsers(req, res, next) {
+//   try {
+//     const users = await User.find({ _id: { $ne: req.params.id } }).select([
+//       "email",
+//       "username",
+//       "avatarImage",
+//       "_id",
+//       "token"
+//     ]);
+//     // console.log(users);
+//   } catch (e) {
+//     console.log(e)
+//   }
+// };
+// getAllUsers()
+
 //
 // io.on("connection", connected, socket => {
 //   socket.join("some room");

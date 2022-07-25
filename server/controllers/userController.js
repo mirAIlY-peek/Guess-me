@@ -62,9 +62,9 @@ module.exports.getAllUsers = async (req, res, next) => {
       "_id",
       "token"
     ]);
-    console.log(users)
-    return res.json(users);
 
+  console.log(users)
+    return res.json(users);
   } catch (ex) {
     next(ex);
   }

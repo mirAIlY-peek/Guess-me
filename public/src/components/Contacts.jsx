@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-// import Logo from "../assets/еее.png";
-// import { render } from "react-dom";
+import Logo from "../assets/еее.png";
+import { render } from "react-dom";
 
 export default function Contacts({contacts, changeChat}) {
     const [currentUserName, setCurrentUserName] = useState(undefined);
@@ -66,17 +66,17 @@ export default function Contacts({contacts, changeChat}) {
                             )
                         })}
                     </div>
-                    {/*<div className="current-user">*/}
-                    {/*  <div className="avatar">*/}
-                    {/*    <img*/}
-                    {/*      src={`data:image/svg+xml;base64,${currentUserImage}`}*/}
-                    {/*      alt="avatar"*/}
-                    {/*    />*/}
-                    {/*  </div>*/}
-                    {/*  <div className="username">*/}
-                    {/*    <h2>{currentUserName}</h2>*/}
-                    {/*  </div>*/}
-                    {/*</div>*/}
+                    <div className="current-user">
+                      <div className="avatar">
+                        <img
+                          src={`data:image/svg+xml;base64,${currentUserImage}`}
+                          alt="avatar"
+                        />
+                      </div>
+                      <div className="username">
+                        <h2>{currentUserName}</h2>
+                      </div>
+                    </div>
                 </Container>
             )}
         </>
