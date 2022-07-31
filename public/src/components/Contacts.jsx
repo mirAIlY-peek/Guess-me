@@ -1,23 +1,68 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-import Logo from "../assets/еее.png";
-import { render } from "react-dom";
+import {runDB} from "../utils/APIRoutes";
+import axios from "axios";
+// import Logo from "../assets/еее.png";
+// import { render } from "react-dom";
+// import {run} from "../../../server/index"
+// const Room = require('../../../server/models/Room')
 
 export default function Contacts({contacts, changeChat}) {
     const [currentUserName, setCurrentUserName] = useState(undefined);
     const [currentUserImage, setCurrentUserImage] = useState(undefined);
     const [currentSelected, setCurrentSelected] = useState(undefined);
+    const [currentUserID, setCurrentUserID] = useState(null);
+    const [currentUser, setCurrentUser] =useState(undefined)
+
     useEffect(async () => {
+        setCurrentUser(
+            await JSON.parse(
+                localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+            )
+        );
         const data = await JSON.parse(
             localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
         );
         setCurrentUserName(data.username);
         setCurrentUserImage(data.avatarImage);
-    }, []);
+        setCurrentUserID(data._id);
+
+
+        }, []);
+
     const changeCurrentChat = (index, contact) => {
         setCurrentSelected(index);
         changeChat(contact);
     };
+
+    // let roomCount = 0
+    // let idUsers1=null
+    // let idUsers2=null
+    // const run = async (userID) => {
+    //     roomCount++
+    //     const room =  new Room({
+    //         roomName: roomCount,
+    //         idUser1: idUsers1=userID,
+    //         idUser2: idUsers2
+    //     })
+    //
+    //     if(room.idUser2==null){
+    //         idUsers2=userID
+    //         roomCount--
+    //     }
+    //     room.save().then(() => {
+    //         console.log('Successfully created new room')
+    //     }).catch((e) => {
+    //         console.log(e);
+    //     })
+    //
+    // }
+
+    // const run = async (userID) => {
+    //         axios.post(runDB, {firstUser: userID})
+    //         console.log(userID)
+    // }
+
 
 
     return (
@@ -29,8 +74,30 @@ export default function Contacts({contacts, changeChat}) {
                         <h3>Anonimus</h3>
                     </div>
 
-
                     <div className="contacts">
+                        {/*<button className="utton" onClick={() => run(currentUserID.toString())}>Start GAME</button>*/}
+                        {/*{contacts.filter((contact, index) => contact._id === currentUser._id ? (*/}
+                        {/*    <div*/}
+                        {/*        // key={contact._id}*/}
+                        {/*        className={`contact ${*/}
+                        {/*            index === currentSelected ? "selected" : ""*/}
+                        {/*        }`}*/}
+                        {/*        onClick={() => changeCurrentChat(index, contact)}*/}
+                        {/*    >*/}
+
+                        {/*        <div className="avatar">*/}
+                        {/*          <img*/}
+                        {/*              src={`data:image/svg+xml;base64,${contact.avatarImage}`}*/}
+                        {/*              alt=""*/}
+                        {/*          />*/}
+                        {/*        </div>*/}
+                        {/*        <div className="username">*/}
+                        {/*          <h3>{contact.username}</h3>*/}
+                        {/*        </div>*/}
+                        {/*        /!*      <button className="utton" onClick={() => run(contact._id.toString())}>Start GAME</button>*!/*/}
+                        {/*        /!*<button className="utton" onClick={() => run(contact._id.toString())}>Start GAME</button>*!/*/}
+                        {/*    </div>*/}
+                        {/*) : false )}*/}
                         {contacts.map((contact, index) => {
                             return (
                                 <div
@@ -40,32 +107,37 @@ export default function Contacts({contacts, changeChat}) {
                                     }`}
                                     onClick={() => changeCurrentChat(index, contact)}
                                 >
-                                  <div className="avatar">
-                                    <img
-                                        src={`data:image/svg+xml;base64,${contact.avatarImage}`}
-                                        alt=""
-                                    />
-                                  </div>
-                                  <div className="username">
-                                    <h3>{contact.username}</h3>
-                                  </div>
 
+                                    <div className="avatar">
+                                        <img
+                                            src={`data:image/svg+xml;base64,${contact.avatarImage}`}
+                                            alt=""
+                                        />
+                                    </div>
+                                    <div className="username">
+                                        <h3>{contact.username}</h3>
+                                    </div>
+                                    {/*      <button className="utton" onClick={() => run(contact._id.toString())}>Start GAME</button>*/}
+                                    {/*  <button className="utton" onClick={() => run(contact._id.toString())}>Start GAME</button>*/}
                                 </div>
-
-                                //
-                                // <form action="">
-                                //   <label>Display name</label>
-                                //   <input type="text" name="username" autoComplete="off" placeholder="Display name" required></input>
-                                //   <label>Room</label>
-                                //   <input type="text" name="room" autoComplete="off" placeholder="Room" required></input>
-                                //   <button>Join</button>
-                                //
-                                //
-                                //
-                                // </form>
                             )
                         })}
+
+                        {/*        //*/}
+                        {/*        // <form action="">*/}
+                        {/*        //   <label>Display name</label>*/}
+                        {/*        //   <input type="text" name="username" autoComplete="off" placeholder="Display name" required></input>*/}
+                        {/*        //   <label>Room</label>*/}
+                        {/*        //   <input type="text" name="room" autoComplete="off" placeholder="Room" required></input>*/}
+                        {/*        //   <button>Join</button>*/}
+                        {/*        //*/}
+                        {/*        //*/}
+                        {/*        //*/}
+                        {/*        // </form>*/}
                     </div>
+
+
+
                     <div className="current-user">
                       <div className="avatar">
                         <img
@@ -76,7 +148,8 @@ export default function Contacts({contacts, changeChat}) {
                       <div className="username">
                         <h2>{currentUserName}</h2>
                       </div>
-                    </div>
+                        </div>
+
                 </Container>
             )}
         </>
@@ -105,6 +178,12 @@ const Container = styled.div`
       color: white;
       text-transform: uppercase;
     }
+  }
+  .utton{
+    width: 100px;
+    height: 40px;
+    background-color: black;
+    color: aliceblue;
   }
 
   .contacts {
