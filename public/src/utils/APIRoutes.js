@@ -7,3 +7,4 @@ export const sendMessageRoute = `${host}/api/messages/addmsg`;
 export const recieveMessageRoute = `${host}/api/messages/getmsg`;
 export const setAvatarRoute = `${host}/api/auth/setavatar`;
 export const runDB = `${host}/api/lobby/addroom`
+export const mixDB = `${host}/api/lobby/mix`

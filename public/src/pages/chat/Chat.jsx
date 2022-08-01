@@ -16,6 +16,10 @@ export default function Chat() {
   const [contacts, setContacts] = useState([]);
   const [currentChat, setCurrentChat] = useState(undefined);
   const [currentUser, setCurrentUser] = useState(undefined);
+
+  const [isShowContacts, setIsShowContacts] = useState(false)
+  const [flag, setFlag] = useState(false);
+
   useEffect(async () => {
     if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
       navigate("/login");
@@ -52,8 +56,8 @@ export default function Chat() {
     <>
       <Container>
         <div className="container">
-          <Contacts contacts={contacts} changeChat={handleChatChange} />
-          {currentChat === undefined ? (<CreateRoom />) : (<ChatContainer currentChat={currentChat} socket={socket} />)}
+          <Contacts contacts={contacts} flag={flag} changeChat={handleChatChange} />
+          {currentChat === undefined ? (<CreateRoom setFlag={setFlag} setIsShowContacts={setIsShowContacts} />) : (<ChatContainer currentChat={currentChat} socket={socket} />)}
         </div>
       </Container>
     </>

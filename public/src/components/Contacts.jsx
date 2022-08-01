@@ -2,17 +2,19 @@ import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import {runDB} from "../utils/APIRoutes";
 import axios from "axios";
+
 // import Logo from "../assets/еее.png";
 // import { render } from "react-dom";
 // import {run} from "../../../server/index"
 // const Room = require('../../../server/models/Room')
 
-export default function Contacts({contacts, changeChat}) {
+export default function Contacts({isShowContacts, contacts, changeChat, flag}) {
     const [currentUserName, setCurrentUserName] = useState(undefined);
     const [currentUserImage, setCurrentUserImage] = useState(undefined);
     const [currentSelected, setCurrentSelected] = useState(undefined);
     const [currentUserID, setCurrentUserID] = useState(null);
     const [currentUser, setCurrentUser] =useState(undefined)
+
 
     useEffect(async () => {
         setCurrentUser(
@@ -34,36 +36,6 @@ export default function Contacts({contacts, changeChat}) {
         setCurrentSelected(index);
         changeChat(contact);
     };
-
-    // let roomCount = 0
-    // let idUsers1=null
-    // let idUsers2=null
-    // const run = async (userID) => {
-    //     roomCount++
-    //     const room =  new Room({
-    //         roomName: roomCount,
-    //         idUser1: idUsers1=userID,
-    //         idUser2: idUsers2
-    //     })
-    //
-    //     if(room.idUser2==null){
-    //         idUsers2=userID
-    //         roomCount--
-    //     }
-    //     room.save().then(() => {
-    //         console.log('Successfully created new room')
-    //     }).catch((e) => {
-    //         console.log(e);
-    //     })
-    //
-    // }
-
-    // const run = async (userID) => {
-    //         axios.post(runDB, {firstUser: userID})
-    //         console.log(userID)
-    // }
-
-
 
     return (
         <>
@@ -100,55 +72,81 @@ export default function Contacts({contacts, changeChat}) {
                         {/*) : false )}*/}
                         {contacts.map((contact, index) => {
                             return (
-                                <div
-                                    key={contact._id}
-                                    className={`contact ${
-                                        index === currentSelected ? "selected" : ""
-                                    }`}
-                                    onClick={() => changeCurrentChat(index, contact)}
-                                >
-
-                                    <div className="avatar">
-                                        <img
-                                            src={`data:image/svg+xml;base64,${contact.avatarImage}`}
-                                            alt=""
-                                        />
-                                    </div>
-                                    <div className="username">
-                                        <h3>{contact.username}</h3>
-                                    </div>
-                                    {/*      <button className="utton" onClick={() => run(contact._id.toString())}>Start GAME</button>*/}
-                                    {/*  <button className="utton" onClick={() => run(contact._id.toString())}>Start GAME</button>*/}
-                                </div>
+                                <>
+                                {flag && (
+                                        <div
+                                            key={contact._id}
+                                        //     className={`
+                                        // ${index === currentSelected && "selected"}
+                                        // ${isShowContacts && 'contact'}
+                                            className={`contact ${
+                                                index === currentSelected ? "selected" : ""
+                                            }`
+                                    }
+                                            onClick={() => changeCurrentChat(index, contact)}
+                                        >
+                                            <div className="avatar">
+                                                <img
+                                                    src={`data:image/svg+xml;base64,${contact.avatarImage}`}
+                                                    alt=""
+                                                />
+                                            </div>
+                                            <div className="username">
+                                                <h3>{contact.username}</h3>
+                                            </div>
+                                            {/*      <button className="utton" onClick={() => run(contact._id.toString())}>Start GAME</button>*/}
+                                            {/*  <button className="utton" onClick={() => run(contact._id.toString())}>Start GAME</button>*/}
+                                        </div>
+                                     )}
+                                </>
+                                // <div
+                                //     key={contact._id}
+                                //     className={`
+                                //         ${index === currentSelected && "selected"}
+                                //         ${isShowContacts && 'contact'}
+                                //     `}
+                                //     onClick={() => changeCurrentChat(index, contact)}
+                                // >
+                                //     <div className="avatar">
+                                //         <img
+                                //             src={`data:image/svg+xml;base64,${contact.avatarImage}`}
+                                //             alt=""
+                                //         />
+                                //     </div>
+                                //     <div className="username">
+                                //         <h3>{contact.username}</h3>
+                                //     </div>
+                                //     {/*      <button className="utton" onClick={() => run(contact._id.toString())}>Start GAME</button>*/}
+                                //     {/*  <button className="utton" onClick={() => run(contact._id.toString())}>Start GAME</button>*/}
+                                // </div>
                             )
                         })}
-
-                        {/*        //*/}
-                        {/*        // <form action="">*/}
-                        {/*        //   <label>Display name</label>*/}
-                        {/*        //   <input type="text" name="username" autoComplete="off" placeholder="Display name" required></input>*/}
-                        {/*        //   <label>Room</label>*/}
-                        {/*        //   <input type="text" name="room" autoComplete="off" placeholder="Room" required></input>*/}
-                        {/*        //   <button>Join</button>*/}
-                        {/*        //*/}
-                        {/*        //*/}
-                        {/*        //*/}
-                        {/*        // </form>*/}
+                            {/*        //*/}
+                            {/*        // <form action="">*/}
+                            {/*        //   <label>Display name</label>*/}
+                            {/*        //   <input type="text" name="username" autoComplete="off" placeholder="Display name" required></input>*/}
+                            {/*        //   <label>Room</label>*/}
+                            {/*        //   <input type="text" name="room" autoComplete="off" placeholder="Room" required></input>*/}
+                            {/*        //   <button>Join</button>*/}
+                            {/*        //*/}
+                            {/*        //*/}
+                            {/*        //*/}
+                            {/*        // </form>*/}
                     </div>
 
 
 
-                    <div className="current-user">
-                      <div className="avatar">
-                        <img
-                          src={`data:image/svg+xml;base64,${currentUserImage}`}
-                          alt="avatar"
-                        />
-                      </div>
-                      <div className="username">
-                        <h2>{currentUserName}</h2>
-                      </div>
-                        </div>
+                    {/*<div className="current-user">*/}
+                    {/*  <div className="avatar">*/}
+                    {/*    <img*/}
+                    {/*      src={`data:image/svg+xml;base64,${currentUserImage}`}*/}
+                    {/*      alt="avatar"*/}
+                    {/*    />*/}
+                    {/*  </div>*/}
+                    {/*  <div className="username">*/}
+                    {/*    <h2>{currentUserName}</h2>*/}
+                    {/*  </div>*/}
+                    {/*</div>*/}
 
                 </Container>
             )}

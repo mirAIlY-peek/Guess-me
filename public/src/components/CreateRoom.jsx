@@ -1,9 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-import {runDB} from "../utils/APIRoutes";
+import {host, runDB} from "../utils/APIRoutes";
+// const socket = io()
+// import {mixDB} from "../utils/APIRoutes";
 import axios from "axios";
-export default function CreateRoom() {
+// import { io } from "socket.io-client";
+// const socket = useRef();
+
+export default function CreateRoom(props) {
     const [currentUserID, setCurrentUserID] = useState(null);
+
+    // const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true })
+
     useEffect(async () => {
         const data = await JSON.parse(
             localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
@@ -15,16 +23,34 @@ export default function CreateRoom() {
         axios.post(runDB, {firstUser: userID})
         console.log(userID)
     }
-    const addAd = async () =>{
-        axios.get(`http://api.galam.life:3000/api/v1/region`)
-                .then((res)=>{
-                    console.log(res)
-                })
+
+    // socket.emit('join', { username, room }, (error) => {
+    //     if (error) {
+    //         alert(error)
+    //         location.href = '/'
+    //     }
+    // })
+
+    const mix = async ()  =>{
+        // console.log('ednogngo')
+        // axios.get(mixDB)
+        //     .then((data)=>{
+        //         console.log('ednogngo')
+        //         console.log(data)
+        // socket.current = io(host);
+        // socket.current.emit("mix", currentUser._id);
     }
+    // const addAd = async () =>{
+    //     axios.get(`http://api.galam.life:3000/api/v1/region`)
+    //             .then((res)=>{
+    //                 console.log(res)
+    //             })
+    // }
+
     return (
         <Container>
-            <button className="button" onClick={() => run(currentUserID.toString())  }>Start GAME</button>
-            <button className="button" onClick={ ()=> addAd()}>Start GAME</button>
+            <button className="button" onClick={() => run(currentUserID.toString(), props.setFlag(e=>!e))}>Start GAME</button>
+            {/*<button className="button" onClick={() => mix()}>mix</button>*/}
         </Container>
     );
 }
