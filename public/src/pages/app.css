@@ -1,0 +1,217 @@
+.App {
+    text-align: center;
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgb(0, 0, 0) 0%, rgb(6, 7, 24) 100%);
+    height: 100vh;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+@import url('https://fonts.googleapis.com/css2?family=Saira:wght@200&family=Work+Sans:ital,wght@1,200&display=swap');@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+.playerDeckText {
+    font-size: 2rem;
+    margin: 0 20px;
+}
+
+.Game {
+    background-size: cover;
+    margin: 0;
+    height: 100vh;
+}
+/* Player Decks */
+.player1Deck {
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.Card {
+    display: flex;
+    align-items: center;
+    color: white;
+    width: 200px;
+    height: 300px;
+    margin: 2px;
+    border-radius: 10px;
+    cursor: pointer;
+    /* font-family: 'Saira', sans-serif; */
+
+
+    font-size: 20px;
+    /* background-color: purple; */
+}
+.Deck{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    flex-direction: row;
+}
+
+.ChoosenCard {
+    width: 200px;
+    height: 285.3px;
+    display: flex;
+    align-items: center;
+    /* font-family: 'Work Sans', sans-serif; */
+
+    border-radius: 15px;
+    font-size: 20px;
+    color: white;
+
+    background-color: rgba(37, 193, 37);
+
+}
+.Start-Status{
+    position: relative;
+padding: 5px;
+    color: white;
+    font-size: 20px;
+    border-radius: 15px;
+    /* background-color: rgba(37, 193, 37); */
+}
+.middleInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: -100px 0 0 0;
+
+}
+.MemeCard{
+    justify-content: center;
+    height: 700px;
+    transform: rotate(-90deg);
+    border-radius: 15px;
+
+}
+.JudgeCard{
+    width: 320px;
+    height: 455.55px;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    display: flex;
+    color: white;
+
+
+
+    border-radius: 15px;
+    background-color: green;
+}
+.Seconds{
+    display: flex;
+    height: 100%;
+    width: 500px;
+    color: white
+    /* background-color: rgba(37, 193, 37); */
+}
+.Status{
+    padding: 5px;
+    color: white;
+    font-size: 20px;
+    border-radius: 15px;
+    background-color: rgba(37, 193, 37);
+}
+.Status{
+    align-items: center;
+    display: flex;
+    z-index: 10;
+}
+
+.UpSide{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    /* justify-content: space-between; */
+    /* margin-top: -60px; */
+    font-size: 50px;
+
+}
+.WhoYou{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    color: white;
+    justify-content: center;
+}
+.Homepage{
+    /* background-color:rgb(236, 205, 205); */
+
+    /* background-image: url("./assets/Images/Back.png"); */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgb(0, 0, 0) 0%, rgb(6, 7, 24) 100%);
+}
+.homepage-menu{
+    /* background-color:rgb(236, 205, 205); */
+
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 600px;
+    width: 500px;
+    /* background: black; */
+
+}
+.Start-name{
+    background-color: white;
+    padding: 50px;
+    border-radius: 30px;
+}
+.homepage-name{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* color: rgb(219, 89, 89); */
+    align-items: center;
+}
+.homepage-join{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+}
+.TextGreen{
+    color: #02AAA4
+}
+.TextPurple{
+    color: #00368E;
+}
+.TextPink{
+    color: #CC2DAE;
+}
+.homepage-form{
+    background-color: white;
+    padding: 50px;
+    border-radius: 30px;
+}

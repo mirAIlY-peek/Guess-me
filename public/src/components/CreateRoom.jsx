@@ -1,16 +1,15 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-import {host, runDB} from "../utils/APIRoutes";
-// const socket = io()
-// import {mixDB} from "../utils/APIRoutes";
+import { runDB} from "../utils/APIRoutes";
 import axios from "axios";
-// import { io } from "socket.io-client";
-// const socket = useRef();
+import {Link} from "react-router-dom";
+import randomCodeGenerator from "../utils/randomCodeGenerator";
+
 
 export default function CreateRoom(props) {
     const [currentUserID, setCurrentUserID] = useState(null);
 
-    // const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true })
+    // const { username, room } = qs.parse(location)
 
     useEffect(async () => {
         const data = await JSON.parse(
@@ -24,14 +23,10 @@ export default function CreateRoom(props) {
         console.log(userID)
     }
 
-    // socket.emit('join', { username, room }, (error) => {
-    //     if (error) {
-    //         alert(error)
-    //         location.href = '/'
-    //     }
-    // })
-
     const mix = async ()  =>{
+
+
+        // console.log(addRooms)
         // console.log('ednogngo')
         // axios.get(mixDB)
         //     .then((data)=>{
@@ -39,7 +34,9 @@ export default function CreateRoom(props) {
         //         console.log(data)
         // socket.current = io(host);
         // socket.current.emit("mix", currentUser._id);
+
     }
+
     // const addAd = async () =>{
     //     axios.get(`http://api.galam.life:3000/api/v1/region`)
     //             .then((res)=>{
@@ -49,8 +46,15 @@ export default function CreateRoom(props) {
 
     return (
         <Container>
-            <button className="button" onClick={() => run(currentUserID.toString(), props.setFlag(e=>!e))}>Start GAME</button>
-            {/*<button className="button" onClick={() => mix()}>mix</button>*/}
+            <>
+
+                {/*<div className='homepage-create'>*/}
+                {/*    <Link to={`/play?roomCode=${randomCodeGenerator(7)}`} style = {{textDecoration: 'none'}}><button variant="contained" className="game-button orange" style = {{width: "200px", backgroundColor: "#00368E", color: "white"}}>CREATE GAME</button>*/}
+                {/*</div>*/}
+
+                <Link to={`/play?roomCode=${randomCodeGenerator(7)}`} style = {{textDecoration: 'none'}}><button className="button" onClick={() => run(currentUserID.toString(), props.setFlag(e=>!e))}>Start GAME</button></Link>
+                {/*<button className="button" onClick={() => mix()}>Join</button>*/}
+            </>
         </Container>
     );
 }

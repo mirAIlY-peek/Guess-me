@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-import {runDB} from "../utils/APIRoutes";
-import axios from "axios";
+// import {runDB} from "../utils/APIRoutes";
+// import axios from "axios";
 
 // import Logo from "../assets/еее.png";
 // import { render } from "react-dom";
@@ -121,17 +121,6 @@ export default function Contacts({isShowContacts, contacts, changeChat, flag}) {
                                 // </div>
                             )
                         })}
-                            {/*        //*/}
-                            {/*        // <form action="">*/}
-                            {/*        //   <label>Display name</label>*/}
-                            {/*        //   <input type="text" name="username" autoComplete="off" placeholder="Display name" required></input>*/}
-                            {/*        //   <label>Room</label>*/}
-                            {/*        //   <input type="text" name="room" autoComplete="off" placeholder="Room" required></input>*/}
-                            {/*        //   <button>Join</button>*/}
-                            {/*        //*/}
-                            {/*        //*/}
-                            {/*        //*/}
-                            {/*        // </form>*/}
                     </div>
 
 
