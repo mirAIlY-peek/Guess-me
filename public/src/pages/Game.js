@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import io from 'socket.io-client'
-import { useSearchParams } from 'react-router-dom';
-
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import './app.css'
+// import { Redirect } from 'react-router-dom'
 
 
 let socket
 const ENDPOINT = 'http://localhost:5000'
 
+
+
 const Game = (props) => {
+
+    let navigate = useNavigate();
+
     // PACK_OF_CARDS();
     const [username, setUsername] = useState('')
 
@@ -20,7 +25,12 @@ const Game = (props) => {
     const [users, setUsers] = useState([])
     const [currentUser, setCurrentUser] = useState('')
     const [gamestarted, setGameStarted] = useState(false);
+
+    const [User, setUser] = useState(null);
+
     let cnt = 0;
+
+
     useEffect(() => {
         const connectionOptions =  {
             "forceNew" : true,
@@ -30,9 +40,26 @@ const Game = (props) => {
         }
         socket = io.connect(ENDPOINT, connectionOptions)
 
-        socket.emit('join', {room: room}, (error) => {
-            if(error)
-                setRoomFull(true)
+        const data = JSON.parse(
+            localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+        );
+
+        if(data == null) {
+            return navigate("/");
+        }
+
+
+        socket.emit('join', {room: room, data: data}, (error) => {
+            console.error(error)
+            if(error) {
+                return navigate("/");
+
+                // setRoomFull(true)
+                // // if(error === 'User already exists'){
+                // //     return (<Navigate to="/" />
+                // //     );
+                // }
+            }
         })
         //cleanup on component unmount
         return function cleanup() {
@@ -48,11 +75,9 @@ const Game = (props) => {
 
     // setOk(false)
     useEffect(() => {
-
         socket.on("roomData", ({ users }) => {
             setUsers(users)
         })
-
         socket.on('currentUserData', ({ name }) => {
             // console.log(name)
             setCurrentUser(name)

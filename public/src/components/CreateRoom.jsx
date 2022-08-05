@@ -4,6 +4,7 @@ import { runDB} from "../utils/APIRoutes";
 import axios from "axios";
 import {Link} from "react-router-dom";
 import randomCodeGenerator from "../utils/randomCodeGenerator";
+import './btn.css'
 
 
 export default function CreateRoom(props) {
@@ -35,6 +36,7 @@ export default function CreateRoom(props) {
         // socket.current = io(host);
         // socket.current.emit("mix", currentUser._id);
 
+
     }
 
     // const addAd = async () =>{
@@ -52,7 +54,10 @@ export default function CreateRoom(props) {
                 {/*    <Link to={`/play?roomCode=${randomCodeGenerator(7)}`} style = {{textDecoration: 'none'}}><button variant="contained" className="game-button orange" style = {{width: "200px", backgroundColor: "#00368E", color: "white"}}>CREATE GAME</button>*/}
                 {/*</div>*/}
 
-                <Link to={`/play?roomCode=${randomCodeGenerator(7)}`} style = {{textDecoration: 'none'}}><button className="button" onClick={() => run(currentUserID.toString(), props.setFlag(e=>!e))}>Start GAME</button></Link>
+                <Link to={`/play?roomCode=${randomCodeGenerator(7)}`} style = {{textDecoration: 'none'}}>
+                    <button className="buttons" onClick={() => run(currentUserID.toString(), props.setFlag(e=>!e))}>Start GAME</button>
+                </Link>
+
                 {/*<button className="button" onClick={() => mix()}>Join</button>*/}
             </>
         </Container>
@@ -68,11 +73,14 @@ const Container = styled.div`
   img {
     height: 20rem;
   }
-  .button{
+  .buttons{
     width: 100px;
     height: 40px;
-    background-color: black;
+    //background-color: black;
+    border-color: #8CECE1;
+    background: #8CECE1;
     color: aliceblue;
+    border-radius: 15px;
   }
   span {
     color: #4e0eff;

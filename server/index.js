@@ -59,14 +59,17 @@ io.on("connection", (socket) => {
 
 
     socket.on('join', (payload, callback) => {
+
         let numberOfUsersInRoom = getUsersInRoom(payload.room)
-        console.log(socket.id)
+        console.log(payload.data)
         const { error, newUser} = addUser({
             id: socket.id,
-            name: 1,
+            name: payload.data.username,
             room: payload.room,
             points: 0,
             ready: false
+
+
         })
         // console.log(newUser.name.charAt(7))
 
@@ -88,7 +91,7 @@ io.on("connection", (socket) => {
     })
 
     socket.on('updateGameState', gameState => {
-        isstarted = gameState.gamestarted;
+        // isstarted = gameState.gamestarted;
         console.log(gameState)
         const user = getUser(socket.id)
         if(user)
@@ -101,15 +104,27 @@ io.on("connection", (socket) => {
     //     callback()
     // })
 
-    // socket.on('disconnect', () => {
-    //     const user = getUser(socket.id)
-    //     removeUser({id: socket.id, room: user.room});
-    //
-    //     if(getUsersInRoom(user.room).length > 0){
-    //         io.to(user.room).emit('roomData', {room: user.room, users: getUsersInRoom(user.room)})
-    //
-    //     }
-    // })
+    socket.on('disconnect', () => {
+    process.on('uncaughtException', function (err) {
+        console.log('Caught exception: ', err);
+    });
+
+    setTimeout(function () {
+        console.log('This will still run.');
+    }, 500);
+
+// Intentionally cause an exception, but don't catch it.
+//         nonexistentFunc();
+    console.log('This will not run.');
+
+
+        const user = getUser(socket.id)
+        removeUser({id: socket.id, room: user.room});
+
+        if(getUsersInRoom(user.room).length > 0){
+            io.to(user.room).emit('roomData', {room: user.room, users: getUsersInRoom(user.room)})
+        }
+    })
 
     // socket.on('setUsername', (username1) => {
     //     const user = getUser(socket.id)

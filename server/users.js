@@ -1,20 +1,28 @@
+const User = require("./models/userModel");
+const express = require("express");
 const users = []
 const num = new Map([ ])
 
 
 const addUser = ({id, name, room, points, ready}) => {
 
+    User.find({username: name})
+
     const numberOfUsersInRoom = users.filter(user => user.room === room).length
     if(numberOfUsersInRoom === 8)
         return { error: 'Room full' }
-    name = num.get(room);
-    num.set(room, num.get(room) + 1);
-    // console.log(num.get(room))
-    const newUser = { id, name, room, points, ready}
-    users.push(newUser)
-    console.log(users)
-    return { newUser }
-
+    let data = users.map(({id}) => id);
+    console.log(data)
+    if(data.indexOf(id) !== -1){
+        return { error: 'User already exists' }
+    }
+    else {
+        const newUser = {id, name, room, points, ready}
+        users.push(newUser)
+        console.log(users)
+        // console.log(setCurrentUserID, 'ieajfoi')
+        return {newUser}
+    }
 }
 
 const removeUser = ({id, room}) => {
