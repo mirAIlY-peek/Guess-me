@@ -56,8 +56,8 @@ export default function Chat() {
     <>
       <Container>
         <div className="container">
-          <Contacts contacts={contacts} flag={flag} changeChat={handleChatChange} />
-          {currentChat === undefined ? (<CreateRoom setFlag={setFlag} setIsShowContacts={setIsShowContacts} />) : (<ChatContainer currentChat={currentChat} socket={socket} />)}
+          {/*<Contacts contacts={contacts}  changeChat={handleChatChange} />*/}
+          {currentChat === undefined ? (<CreateRoom  />) : (<ChatContainer currentChat={currentChat} socket={socket} />)}
         </div>
       </Container>
     </>

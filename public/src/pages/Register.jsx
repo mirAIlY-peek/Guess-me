@@ -19,7 +19,7 @@ export default function Register() {
   };
   const [values, setValues] = useState({
     username: "",
-    email: "",
+    FullName: "",
     password: "",
     confirmPassword: "",
   });
@@ -35,7 +35,7 @@ export default function Register() {
   };
 
   const handleValidation = () => {
-    const { password, confirmPassword, username, email } = values;
+    const { password, confirmPassword, username, FullName } = values;
     if (password !== confirmPassword) {
       toast.error(
         "Password and confirm password should be same.",
@@ -54,21 +54,20 @@ export default function Register() {
         toastOptions
       );
       return false;
-    } else if (email === "") {
-      toast.error("Email is required.", toastOptions);
+    } else if (FullName === "") {
+        toast.error("FullName is required.", toastOptions);
       return false;
     }
-
     return true;
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (handleValidation()) {
-      const { email, username, password } = values;
+      const { FullName, username, password } = values;
       const { data } = await axios.post(registerRoute, {
         username,
-        email,
+        FullName,
         password,
       });
 
@@ -100,9 +99,9 @@ export default function Register() {
             onChange={(e) => handleChange(e)}
           />
           <input
-            type="email"
-            placeholder="Email"
-            name="email"
+            type="text"
+            placeholder="Full name"
+            name="FullName"
             onChange={(e) => handleChange(e)}
           />
           <input

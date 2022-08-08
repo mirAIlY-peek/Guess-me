@@ -1,30 +1,56 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import { runDB} from "../utils/APIRoutes";
+import { mixDB} from "../utils/APIRoutes"
 import axios from "axios";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import randomCodeGenerator from "../utils/randomCodeGenerator";
 import './btn.css'
 
 
-export default function CreateRoom(props) {
+
+export default function CreateRoom({users}) {
     const [currentUserID, setCurrentUserID] = useState(null);
 
-    // const { username, room } = qs.parse(location)
+    const navigate = useNavigate();
+    // const [roomCode, setRoomCode] = useState(randomCodeGenerator(7))
+    // const [searchParams] = useSearchParams();
+    // const data = searchParams.get("roomCode");
+    // const [room, setRoom] = useState(data)
+    // const [run , setRun] = useState()
 
+    // const { username, room } = qs.parse(location)
     useEffect(async () => {
         const data = await JSON.parse(
             localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
         );
         setCurrentUserID(data._id);
+        // socket.emit('join', {room: room, data: data}
     }, []);
 
-    const run = async (userID) => {
-        axios.post(runDB, {firstUser: userID})
-        console.log(userID)
+    const runFunction = async () => {
+
+        const roomCode =  randomCodeGenerator(7)
+
+        const res = await axios.get(runDB);
+
+        console.log(res);
+
+       axios.post(runDB, {users: currentUserID.toString(), roomID:roomCode })
+        navigate(`/play?roomCode=${roomCode}`)
+
+        // console.log(users);
+        console.log({firstUser: currentUserID.toString()})
+        //   axios.post(runDB, {roomms: room})
     }
 
-    const mix = async ()  =>{
+    // useEffect(async ()=> {
+    //     if(room && currentUserID){
+    //         runFunction()
+    //     }
+    // }, [room,currentUserID])
+
+    const mix = async () => {
 
 
         // console.log(addRooms)
@@ -46,6 +72,10 @@ export default function CreateRoom(props) {
     //             })
     // }
 
+
+    // console.log(roomCode,currentUserID)
+    if( !currentUserID) return <>No room or currUser</>
+
     return (
         <Container>
             <>
@@ -54,15 +84,18 @@ export default function CreateRoom(props) {
                 {/*    <Link to={`/play?roomCode=${randomCodeGenerator(7)}`} style = {{textDecoration: 'none'}}><button variant="contained" className="game-button orange" style = {{width: "200px", backgroundColor: "#00368E", color: "white"}}>CREATE GAME</button>*/}
                 {/*</div>*/}
 
-                <Link to={`/play?roomCode=${randomCodeGenerator(7)}`} style = {{textDecoration: 'none'}}>
-                    <button className="buttons" onClick={() => run(currentUserID.toString(), props.setFlag(e=>!e))}>Start GAME</button>
-                </Link>
+                    <input placeholder='Game Code'/>
+                         <button className="buttons">Start</button>
+
+                <button  className="buttons" onClick={runFunction}>
+           create
+                </button>
 
                 {/*<button className="button" onClick={() => mix()}>Join</button>*/}
             </>
         </Container>
     );
-}
+};
 
 const Container = styled.div`
   display: flex;

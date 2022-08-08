@@ -1,20 +1,20 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-// import {runDB} from "../utils/APIRoutes";
-// import axios from "axios";
+import { mixDB} from "../utils/APIRoutes";
+import axios from "axios";
+import {useSearchParams} from "react-router-dom";
 
-// import Logo from "../assets/еее.png";
-// import { render } from "react-dom";
-// import {run} from "../../../server/index"
-// const Room = require('../../../server/models/Room')
 
-export default function Contacts({isShowContacts, contacts, changeChat, flag}) {
+export default function Contacts({contacts, changeChat, users}) {
     const [currentUserName, setCurrentUserName] = useState(undefined);
     const [currentUserImage, setCurrentUserImage] = useState(undefined);
     const [currentSelected, setCurrentSelected] = useState(undefined);
     const [currentUserID, setCurrentUserID] = useState(null);
-    const [currentUser, setCurrentUser] =useState(undefined)
+    const [currentUser, setCurrentUser] = useState(undefined);
 
+    const [searchParams] = useSearchParams();
+    const data = searchParams.get("roomCode");
+    const [room, setRoom] = useState(data)
 
     useEffect(async () => {
         setCurrentUser(
@@ -28,13 +28,18 @@ export default function Contacts({isShowContacts, contacts, changeChat, flag}) {
         setCurrentUserName(data.username);
         setCurrentUserImage(data.avatarImage);
         setCurrentUserID(data._id);
+        // console.log(users);
+    }, []);
 
 
-        }, []);
+    const mix = ()=>{
+        axios.post(mixDB, {lobbyRoomID: users.room})
+    }
 
-    const changeCurrentChat = (index, contact) => {
+    const changeCurrentChat = (index, contact ) => {
         setCurrentSelected(index);
         changeChat(contact);
+        console.log(users)
     };
 
     return (
@@ -47,6 +52,7 @@ export default function Contacts({isShowContacts, contacts, changeChat, flag}) {
                     </div>
 
                     <div className="contacts">
+
                         {/*<button className="utton" onClick={() => run(currentUserID.toString())}>Start GAME</button>*/}
                         {/*{contacts.filter((contact, index) => contact._id === currentUser._id ? (*/}
                         {/*    <div*/}
@@ -70,35 +76,44 @@ export default function Contacts({isShowContacts, contacts, changeChat, flag}) {
                         {/*        /!*<button className="utton" onClick={() => run(contact._id.toString())}>Start GAME</button>*!/*/}
                         {/*    </div>*/}
                         {/*) : false )}*/}
-                        {contacts.map((contact, index) => {
+                        {/*{contacts.filter((users) =>{*/}
+                        {users.map((contact, index) => {
                             return (
                                 <>
-                                {flag && (
-                                        <div
-                                            key={contact._id}
+                                    {/*{flag && (*/}
+                                    <div
+                                        key={contact.id}
                                         //     className={`
                                         // ${index === currentSelected && "selected"}
                                         // ${isShowContacts && 'contact'}
-                                            className={`contact ${
-                                                index === currentSelected ? "selected" : ""
-                                            }`
-                                    }
-                                            onClick={() => changeCurrentChat(index, contact)}
-                                        >
-                                            <div className="avatar">
-                                                <img
-                                                    src={`data:image/svg+xml;base64,${contact.avatarImage}`}
-                                                    alt=""
-                                                />
-                                            </div>
-                                            <div className="username">
-                                                <h3>{contact.username}</h3>
-                                            </div>
-                                            {/*      <button className="utton" onClick={() => run(contact._id.toString())}>Start GAME</button>*/}
-                                            {/*  <button className="utton" onClick={() => run(contact._id.toString())}>Start GAME</button>*/}
+                                        className={`contact ${
+                                            index === currentSelected ? "selected" : ""
+                                        }`
+                                        }
+                                        onClick={() => changeCurrentChat(index, contact)}
+                                    >
+                                        <div className="avatar">
+                                            <img
+                                                src={`data:image/svg+xml;base64,${contact.avatarImage}`}
+                                                alt=""
+                                            />
                                         </div>
-                                     )}
+                                        <div className="username">
+                                            <h3>{contact.username}</h3>
+                                        </div>
+
+                                        {/*      <button className="utton" onClick={() => run(contact._id.toString())}>Start GAME</button>*/}
+                                        {/*  <button className="utton" onClick={() => run(contact._id.toString())}>Start GAME</button>*/}
+                                    </div>
+                                    {/*)}*/}
+                                    {/*<p>{users.map((item, i) => (*/}
+                                    {/*    <span key ={i}>{`${item.username} ${item.name ? " This is you" : ""}`}</span>*/}
+                                    {/*))}*/}
+                                    {/*</p>*/}
+                                    {/*<button className="utton" onClick={() => mix()}>Start GAME</button>*/}
+
                                 </>
+
                                 // <div
                                 //     key={contact._id}
                                 //     className={`
@@ -120,9 +135,8 @@ export default function Contacts({isShowContacts, contacts, changeChat, flag}) {
                                 //     {/*  <button className="utton" onClick={() => run(contact._id.toString())}>Start GAME</button>*/}
                                 // </div>
                             )
-                        })}
+                            })}
                     </div>
-
 
 
                     {/*<div className="current-user">*/}
@@ -166,7 +180,8 @@ const Container = styled.div`
       text-transform: uppercase;
     }
   }
-  .utton{
+
+  .utton {
     width: 100px;
     height: 40px;
     background-color: black;
