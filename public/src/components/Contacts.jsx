@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-import { mixDB} from "../utils/APIRoutes";
-import axios from "axios";
+// import { mixDB} from "../utils/APIRoutes";
+// import axios from "axios";
 import {useSearchParams} from "react-router-dom";
 
 
@@ -32,9 +32,9 @@ export default function Contacts({contacts, changeChat, users}) {
     }, []);
 
 
-    const mix = ()=>{
-        axios.post(mixDB, {lobbyRoomID: users.room})
-    }
+    // const mix = ()=>{
+    //     axios.post(mixDB, {lobbyRoomID: users.room})
+    // }
 
     const changeCurrentChat = (index, contact ) => {
         setCurrentSelected(index);

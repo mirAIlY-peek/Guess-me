@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import { runDB} from "../utils/APIRoutes";
-import { mixDB} from "../utils/APIRoutes"
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
 import randomCodeGenerator from "../utils/randomCodeGenerator";
@@ -28,15 +27,13 @@ export default function CreateRoom({users}) {
         // socket.emit('join', {room: room, data: data}
     }, []);
 
-    const runFunction = async () => {
+    const runFunction = () => {
 
         const roomCode =  randomCodeGenerator(7)
 
-        const res = await axios.get(runDB);
-
-        console.log(res);
-
-       axios.post(runDB, {users: currentUserID.toString(), roomID:roomCode })
+        // const res = await axios.get(runDB);
+        //
+       axios.post(runDB, {firstUser: currentUserID.toString(), roomID:roomCode })
         navigate(`/play?roomCode=${roomCode}`)
 
         // console.log(users);
@@ -50,20 +47,6 @@ export default function CreateRoom({users}) {
     //     }
     // }, [room,currentUserID])
 
-    const mix = async () => {
-
-
-        // console.log(addRooms)
-        // console.log('ednogngo')
-        // axios.get(mixDB)
-        //     .then((data)=>{
-        //         console.log('ednogngo')
-        //         console.log(data)
-        // socket.current = io(host);
-        // socket.current.emit("mix", currentUser._id);
-
-
-    }
 
     // const addAd = async () =>{
     //     axios.get(`http://api.galam.life:3000/api/v1/region`)

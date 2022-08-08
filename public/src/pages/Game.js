@@ -139,8 +139,8 @@ const Game = (props) => {
     const [ok, setOk] = useState(true);
     // setOk(false)
     useEffect(async () => {
-       await socket.on("roomData", ({ socketUser }) => {
-            setUsers(socketUser)
+       await socket.on("roomData", ({ users }) => {
+            setUsers(users)
         })
        await socket.on('currentUserData', ({ name }) => {
             // console.log(name)
