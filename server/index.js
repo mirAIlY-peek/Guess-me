@@ -61,11 +61,12 @@ io.on("connection", (socket) => {
     socket.on('join', (payload, callback) => {
 
         let numberOfUsersInRoom = getUsersInRoom(payload.room)
-        console.log(payload.data)
+        // console.log(payload.data)
         const { error, newUser} = addUser({
-            id: socket.id,
+            id: payload.data._id,
             name: payload.data.username,
             room: payload.room,
+            avatarImage: payload.data.avatarImage,
             points: 0,
             ready: false
 
@@ -105,17 +106,13 @@ io.on("connection", (socket) => {
     // })
 
     socket.on('disconnect', () => {
-    process.on('uncaughtException', function (err) {
-        console.log('Caught exception: ', err);
-    });
+        process.on('uncaughtException', function (err) {
+            console.log('Caught exception: ', err);
+        });
+        setTimeout(function () {
+            console.log('This will still run.');
+        }, 500);
 
-    setTimeout(function () {
-        console.log('This will still run.');
-    }, 500);
-
-// Intentionally cause an exception, but don't catch it.
-//         nonexistentFunc();
-    console.log('This will not run.');
 
 
         const user = getUser(socket.id)

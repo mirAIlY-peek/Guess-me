@@ -1,32 +1,47 @@
 const Lobby = require("../models/lobbyModel");
 const socket = require("socket.io");
+const User = require("../models/userModel");
 
-module.exports.run = async (req) => {
+
+// const { addUser} = require('../users')
+
+module.exports.run = async (req, payload) => {
+    const{roomID} = req.body;
     const {firstUser} = req.body;
+    // const min = addUser({
+    //     room: payload.room
+    // })
+
+    // const {lobbieID} = req.body;
     try {
         const rooms = await Lobby.find();
         let idUsers2 = undefined
+
         const room = new Lobby({
                 lobbyNumber: rooms.length + 1,
+                lobbyRoomID: roomID,
+                finished: false,
                 idUser1: firstUser,
                 idUser2: idUsers2
             }
         )
-        console.log(firstUser);
-
+        // if(Lobby[3].idUser1===firstUser){
+        //
+        // }
+        // console.log(firstUser);
         room.save()
-
     } catch (e) {
         console.log(e)
     }
 
 }
 
-module.exports.mix = async () => {
+module.exports.mix = async (req, res) => {
     try {
-        const sockets = Array.from(socket).map(socket => socket[0]);
-        console.log(sockets, 'adnognogn')
-        return sockets
+
+        const room = await Lobby.find();
+
+
     } catch (e) {
         console.log(e)
     }

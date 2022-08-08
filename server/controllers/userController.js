@@ -30,17 +30,17 @@ module.exports.login = async (req, res, next) => {
 
 module.exports.register = async (req, res, next) => {
   try {
-    const { username, email, password} = req.body;
+    const { username, FullName, password} = req.body;
     const usernameCheck = await User.findOne({ username });
     if (usernameCheck)
       return res.json({ msg: "Username already used", status: false });
-    const emailCheck = await User.findOne({ email });
+    const emailCheck = await User.findOne({ FullName });
     if (emailCheck)
-      return res.json({ msg: "Email already used", status: false });
+      return res.json({ msg: "FullName already used", status: false });
     const hashedPassword = await bcrypt.hash(password, 10);
     const token = generateAccessToken(req.body.password);
     const user = await User.create({
-      email,
+      FullName,
       username,
       password: hashedPassword,
       token,
@@ -56,7 +56,7 @@ module.exports.register = async (req, res, next) => {
 module.exports.getAllUsers = async (req, res, next) => {
   try {
     const users = await User.find({ _id: { $ne: req.params.id } }).select([
-      "email",
+      "FullName",
       "username",
       "avatarImage",
       "_id",

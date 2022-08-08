@@ -4,7 +4,7 @@ const users = []
 const num = new Map([ ])
 
 
-const addUser = ({id, name, room, points, ready}) => {
+const addUser = ({id, name, room, points, ready, avatarImage}) => {
 
     User.find({username: name})
 
@@ -17,9 +17,9 @@ const addUser = ({id, name, room, points, ready}) => {
         return { error: 'User already exists' }
     }
     else {
-        const newUser = {id, name, room, points, ready}
+        const newUser = {id, name, room, points, ready, avatarImage}
         users.push(newUser)
-        console.log(users)
+        console.log(newUser)
         // console.log(setCurrentUserID, 'ieajfoi')
         return {newUser}
     }
