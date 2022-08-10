@@ -12,36 +12,38 @@ const roomSchema = new mongoose.Schema({
     finished: {
             type: Boolean,
     },
-    // users: [
-    //     {userID: {
-    //         typeL
-    //         }}
-    // ]
-    idUser1: {
-        type: [
-            {
-                type: mongoose.Schema.ObjectId,
-                ref: "User",
-            },
-        ],
-    },
-    idUser2: {
-        type: [
-            {
-                type: mongoose.Schema.ObjectId,
-                ref: "User",
-            },
-        ],
-    },
-    idUser3: {
-        type: [
-            {
-                type: mongoose.Schema.ObjectId,
-                ref: "User",
-                required: false,
-            },
-        ],
-    },
+
+    users: [{
+        userID: {
+            type: mongoose.Schema.ObjectId,
+            ref: "User",
+        }
+    }]
+    // idUser1: {
+    //     type: [
+    //         {
+    //             type: mongoose.Schema.ObjectId,
+    //             ref: "User",
+    //         },
+    //     ],
+    // },
+    // idUser2: {
+    //     type: [
+    //         {
+    //             type: mongoose.Schema.ObjectId,
+    //             ref: "User",
+    //         },
+    //     ],
+    // },
+    // idUser3: {
+    //     type: [
+    //         {
+    //             type: mongoose.Schema.ObjectId,
+    //             ref: "User",
+    //             required: false,
+    //         },
+    //     ],
+    // },
 });
 
 module.exports = mongoose.model("Lobby", roomSchema);
