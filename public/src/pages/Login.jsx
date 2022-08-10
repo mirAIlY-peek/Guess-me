@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { loginRoute } from "../utils/APIRoutes";
 import back from "./login.css"
+import Error from "../components/error";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -68,6 +69,25 @@ export default function Login() {
   //     backgroundSize: 'cover',
   //     overflow: 'hidden',
   // }
+
+  const [windowSize, setWindowSize] = useState(getWindowSize());
+  useEffect(() => {
+    function handleWindowResize() {
+      setWindowSize(getWindowSize());
+    }
+    window.addEventListener('resize', handleWindowResize);
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, []);
+
+  function getWindowSize() {
+    const {innerWidth, innerHeight} = window;
+    return {innerWidth, innerHeight};
+  }
+
+
+  if(windowSize.innerWidth < 666) return <><Error/></>
 
   return (
     <>

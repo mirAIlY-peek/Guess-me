@@ -5,7 +5,7 @@ import styled from "styled-components";
 import {useSearchParams} from "react-router-dom";
 
 
-export default function Contacts({contacts, changeChat, users}) {
+export default function FAQ({contacts, changeChat, users}) {
     const [currentUserName, setCurrentUserName] = useState(undefined);
     const [currentUserImage, setCurrentUserImage] = useState(undefined);
     const [currentSelected, setCurrentSelected] = useState(undefined);
@@ -48,7 +48,7 @@ export default function Contacts({contacts, changeChat, users}) {
                 <Container>
                     <div className="brand">
                         {/*<img src={Logo} alt="logo"/>*/}
-                        <h3>Anonimus</h3>
+                        <h2>Anonimus</h2>
                     </div>
 
                     <div className="contacts">
@@ -77,79 +77,24 @@ export default function Contacts({contacts, changeChat, users}) {
                         {/*    </div>*/}
                         {/*) : false )}*/}
                         {/*{contacts.filter((users) =>{*/}
-                        {contacts.map((contact, index) => {
-                            return (
+
                                 <>
-                                    {/*{flag && (*/}
-                                    <div
-                                        key={contact.id}
-                                        //     className={`
-                                        // ${index === currentSelected && "selected"}
-                                        // ${isShowContacts && 'contact'}
-                                        className={`contact ${
-                                            index === currentSelected ? "selected" : ""
-                                        }`
-                                        }
-                                        onClick={() => changeCurrentChat(index, contact)}
-                                    >
+
+                                    <div className="FAQ">
                                         <div className="avatar">
-                                            <img
-                                                src={`data:image/svg+xml;base64,${contact.avatarImage}`}
-                                                alt=""
-                                            />
+                                            <h2>How to play</h2>
                                         </div>
                                         <div className="username">
-                                            <h3>{contact.username}</h3>
+                                            <h3><span>1.</span> Invite friends to play</h3>
+                                            <br/>
+                                            <h3 className="aa"><span>2. </span>  time to guess</h3>
+                                            <br/>
+                                            <h3 className="aaa"><span>3. </span>  look at the result</h3>
                                         </div>
-
-                                        {/*      <button className="utton" onClick={() => run(contact._id.toString())}>Start GAME</button>*/}
-                                        {/*  <button className="utton" onClick={() => run(contact._id.toString())}>Start GAME</button>*/}
                                     </div>
-                                    {/*)}*/}
-                                    {/*<p>{users.map((item, i) => (*/}
-                                    {/*    <span key ={i}>{`${item.username} ${item.name ? " This is you" : ""}`}</span>*/}
-                                    {/*))}*/}
-                                    {/*</p>*/}
-                                    {/*<button className="utton" onClick={() => mix()}>Start GAME</button>*/}
-
                                 </>
-
-                                // <div
-                                //     key={contact._id}
-                                //     className={`
-                                //         ${index === currentSelected && "selected"}
-                                //         ${isShowContacts && 'contact'}
-                                //     `}
-                                //     onClick={() => changeCurrentChat(index, contact)}
-                                // >
-                                //     <div className="avatar">
-                                //         <img
-                                //             src={`data:image/svg+xml;base64,${contact.avatarImage}`}
-                                //             alt=""
-                                //         />
-                                //     </div>
-                                //     <div className="username">
-                                //         <h3>{contact.username}</h3>
-                                //     </div>
-                                //     {/*      <button className="utton" onClick={() => run(contact._id.toString())}>Start GAME</button>*/}
-                                //     {/*  <button className="utton" onClick={() => run(contact._id.toString())}>Start GAME</button>*/}
-                                // </div>
-                            )
-                            })}
                     </div>
 
-
-                    {/*<div className="current-user">*/}
-                    {/*  <div className="avatar">*/}
-                    {/*    <img*/}
-                    {/*      src={`data:image/svg+xml;base64,${currentUserImage}`}*/}
-                    {/*      alt="avatar"*/}
-                    {/*    />*/}
-                    {/*  </div>*/}
-                    {/*  <div className="username">*/}
-                    {/*    <h2>{currentUserName}</h2>*/}
-                    {/*  </div>*/}
-                    {/*</div>*/}
 
                 </Container>
             )}
@@ -175,7 +120,7 @@ const Container = styled.div`
       height: 2rem;
     }
 
-    h3 {
+    h2 {
       color: white;
       text-transform: uppercase;
     }
@@ -205,6 +150,39 @@ const Container = styled.div`
       }
     }
 
+    .FAQ {
+      margin-top: 20px;
+      width: 80%;
+      border-radius: 15px;
+      height: 100%;
+      background-color: rgba(172, 239, 245, 0.33);
+
+      .avatar {
+        h2 {
+          text-align: center;
+        }
+      }
+      .username {
+        margin:40px 0 0 10px;
+        h3 {
+          span{
+            color: white;
+            font-weight: bold;
+          }
+          margin: 10px auto;
+          text-align: center;
+        }
+        .aa{
+          margin-left: 33px;
+          text-align: left;
+        }
+        .aaa{
+          margin-left: 33px;
+          text-align: left;
+        }
+      }
+    }
+
     .contact {
       background-color: #ffffff34;
       min-height: 5rem;
@@ -216,11 +194,11 @@ const Container = styled.div`
       gap: 1rem;
       align-items: center;
       transition: 0.5s ease-in-out;
+      height: 100%;
 
-      .avatar {
-        img {
-          height: 3rem;
-        }
+
+      .avatar h3 {
+        text-align: center;
       }
 
       .username {
@@ -254,6 +232,7 @@ const Container = styled.div`
         color: white;
       }
     }
+
 
     @media screen and (min-width: 720px) and (max-width: 1080px) {
       gap: 0.5rem;

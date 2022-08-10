@@ -9,7 +9,7 @@ import ChatContainer from "../components/ChatContainer";
 import Contacts from "../components/Contacts";
 import Welcome from "../components/Welcome";
 import CreateRoom from "../components/CreateRoom";
-
+import Error from "../components/error";
 
 
 let socket
@@ -153,6 +153,26 @@ const Game = (props) => {
     const mix = ()=>{
         // console.log(users)
     }
+
+    const [windowSize, setWindowSize] = useState(getWindowSize());
+    useEffect(() => {
+        function handleWindowResize() {
+            setWindowSize(getWindowSize());
+        }
+        window.addEventListener('resize', handleWindowResize);
+        return () => {
+            window.removeEventListener('resize', handleWindowResize);
+        };
+    }, []);
+
+    function getWindowSize() {
+        const {innerWidth, innerHeight} = window;
+        return {innerWidth, innerHeight};
+    }
+
+
+    if(windowSize.innerWidth < 666) return <><Error/></>
+
 
     return (
         <div>

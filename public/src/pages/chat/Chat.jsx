@@ -8,6 +8,8 @@ import ChatContainer from "../../components/ChatContainer";
 import Contacts from "../../components/Contacts";
 import Welcome from "../../components/Welcome";
 import CreateRoom from "../../components/CreateRoom";
+import Error from "../../components/error";
+import FAQ from "../../components/FAQ";
 
 
 export default function Chat() {
@@ -19,6 +21,25 @@ export default function Chat() {
 
   const [isShowContacts, setIsShowContacts] = useState(false)
   const [flag, setFlag] = useState(false);
+
+
+  const [windowSize, setWindowSize] = useState(getWindowSize());
+  useEffect(() => {
+    function handleWindowResize() {
+      setWindowSize(getWindowSize());
+    }
+    window.addEventListener('resize', handleWindowResize);
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, []);
+
+  function getWindowSize() {
+    const {innerWidth, innerHeight} = window;
+    return {innerWidth, innerHeight};
+  }
+
+
 
   useEffect(async () => {
     if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
@@ -52,11 +73,13 @@ export default function Chat() {
     setCurrentChat(chat);
   };
 
+
+  if(windowSize.innerWidth < 666) return <><Error/></>
   return (
     <>
       <Container>
         <div className="container">
-          {/*<Contacts contacts={contacts}  changeChat={handleChatChange} />*/}
+          <FAQ contacts={contacts}  changeChat={handleChatChange} />
           {currentChat === undefined ? (<CreateRoom  />) : (<ChatContainer currentChat={currentChat} socket={socket} />)}
         </div>
       </Container>

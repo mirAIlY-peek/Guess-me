@@ -6,7 +6,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Homepage from './pages/Homepage'
 import Game from './pages/Game'
-
+import Error from './components/error'
 export default function App() {
   return (
     <BrowserRouter>
@@ -16,7 +16,9 @@ export default function App() {
         <Route path="/setAvatar" element={<SetAvatar />} />
         <Route path='/home' element={< Homepage/>} />
         <Route path='/play' element={< Game/>} />
+        <Route path='/play:roomId' element={< Game/>} />
         <Route path="/" element={<Chat />} />
+        <Route path="/join/:userId" element={<Error/>}/>
       </Routes>
     </BrowserRouter>
   );

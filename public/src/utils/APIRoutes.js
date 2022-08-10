@@ -1,4 +1,4 @@
-export const host = "http://localhost:5000";
+export const host = "https://miras-zadalbal.herokuapp.com";
 export const loginRoute = `${host}/api/auth/login`;
 export const registerRoute = `${host}/api/auth/register`;
 export const logoutRoute = `${host}/api/auth/logout`;
@@ -7,5 +7,7 @@ export const sendMessageRoute = `${host}/api/messages/addmsg`;
 export const recieveMessageRoute = `${host}/api/messages/getmsg`;
 export const setAvatarRoute = `${host}/api/auth/setavatar`;
 export const runDB = `${host}/api/lobby/addroom`
-// export const mixDB = `${host}/api/lobby/mix`
+export const mixDB = `${host}/api/lobby/mix`
+export const joinDB = `${host}/api/lobby/join`
+export const joinUserDB = `${host}/api/lobby/joinUser`
 // export const addRooms = `${host}/api/auth/addUser`
